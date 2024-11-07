@@ -15,7 +15,7 @@ const handleResponse = (response) => {
 
 export const UserSignUp = async (data) => {
   try {
-    const response = await API.post("user/signup", data);
+    const response = await API.post("https://fitness-tracker-backend-fpdk.onrender.com/api/user/signup", data);
     return handleResponse(response); // Check and return response data
   } catch (error) {
     console.error("Error during sign-up:", error.message);
@@ -25,7 +25,7 @@ export const UserSignUp = async (data) => {
 
 export const UserSignIn = async (data) => {
   try {
-    const response = await API.post("user/signin", data);
+    const response = await API.post("https://fitness-tracker-backend-fpdk.onrender.com/api/user/signin", data);
     return handleResponse(response);
   } catch (error) {
     console.error("Error during sign-in:", error.message);
@@ -35,7 +35,7 @@ export const UserSignIn = async (data) => {
 
 export const getDashboardDetails = async (token) => {
   try {
-    const response = await API.get("user/dashboard", {
+    const response = await API.get("https://fitness-tracker-backend-fpdk.onrender.com/api/user/dashboard", {
       headers: { Authorization: `Bearer ${token}` },
     });
     return handleResponse(response);
@@ -47,7 +47,7 @@ export const getDashboardDetails = async (token) => {
 
 export const getWorkouts = async (token, date) => {
   try {
-    const response = await API.get(`user/workout${date}`, {
+    const response = await API.get(`https://fitness-tracker-backend-fpdk.onrender.com/api/user/workout${date}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return handleResponse(response);
@@ -59,7 +59,7 @@ export const getWorkouts = async (token, date) => {
 
 export const addWorkout = async (token, data) => {
   try {
-    const response = await API.post("user/workout", data, {
+    const response = await API.post("https://fitness-tracker-backend-fpdk.onrender.com/api/user/workout", data, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return handleResponse(response);
