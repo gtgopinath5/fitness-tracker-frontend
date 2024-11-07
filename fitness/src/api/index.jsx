@@ -1,7 +1,8 @@
 import axios from "axios";
 
+// Create an axios instance with the base URL for the backend API
 const API = axios.create({
-    baseURL: "https://fitness-tracker-backend-fpdk.onrender.com/api/",
+    baseURL: "https://fitness-tracker-backend-fpdk.onrender.com/api/",  // Base URL
 });
 
 // Helper function to check the response before accessing 'data'
@@ -13,9 +14,10 @@ const handleResponse = (response) => {
   }
 };
 
+// User sign-up API call
 export const UserSignUp = async (data) => {
   try {
-    const response = await API.post("https://fitness-tracker-backend-fpdk.onrender.com/api/user/signup", data);
+    const response = await API.post("user/signup", data); // No need for the full URL here
     return handleResponse(response); // Check and return response data
   } catch (error) {
     console.error("Error during sign-up:", error.message);
@@ -23,9 +25,10 @@ export const UserSignUp = async (data) => {
   }
 };
 
+// User sign-in API call
 export const UserSignIn = async (data) => {
   try {
-    const response = await API.post("https://fitness-tracker-backend-fpdk.onrender.com/api/user/signin", data);
+    const response = await API.post("user/signin", data); // Again, relative URL
     return handleResponse(response);
   } catch (error) {
     console.error("Error during sign-in:", error.message);
@@ -33,10 +36,11 @@ export const UserSignIn = async (data) => {
   }
 };
 
+// Get dashboard details with token authorization
 export const getDashboardDetails = async (token) => {
   try {
-    const response = await API.get("https://fitness-tracker-backend-fpdk.onrender.com/api/user/dashboard", {
-      headers: { Authorization: `Bearer ${token}` },
+    const response = await API.get("user/dashboard", {
+      headers: { Authorization: `Bearer ${token}` }, // Use Authorization header
     });
     return handleResponse(response);
   } catch (error) {
@@ -45,9 +49,10 @@ export const getDashboardDetails = async (token) => {
   }
 };
 
+// Get workouts for a specific date with token authorization
 export const getWorkouts = async (token, date) => {
   try {
-    const response = await API.get(`https://fitness-tracker-backend-fpdk.onrender.com/api/user/workout${date}`, {
+    const response = await API.get(`user/workout${date}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return handleResponse(response);
@@ -57,9 +62,10 @@ export const getWorkouts = async (token, date) => {
   }
 };
 
+// Add a new workout entry with token authorization
 export const addWorkout = async (token, data) => {
   try {
-    const response = await API.post("https://fitness-tracker-backend-fpdk.onrender.com/api/user/workout", data, {
+    const response = await API.post("user/workout", data, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return handleResponse(response);
