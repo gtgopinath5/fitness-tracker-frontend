@@ -13,11 +13,13 @@ const Container = styled.div`
   flex-direction: column;
   gap: 36px;
 `;
+
 const Title = styled.div`
   font-size: 30px;
   font-weight: 800;
   color: ${({ theme }) => theme.text_primary};
 `;
+
 const Span = styled.div`
   font-size: 16px;
   font-weight: 400;
@@ -43,18 +45,16 @@ const SignIn = () => {
     setLoading(true);
     setButtonDisabled(true);
     if (validateInputs()) {
-      await UserSignIn({ email, password })
-        .then((res) => {
-          dispatch(loginSuccess(res.data));
-          alert("Login Success");
-          setLoading(false);
-          setButtonDisabled(false);
-        })
-        .catch((err) => {
-          alert(err.response.data.message);
-          setLoading(false);
-          setButtonDisabled(false);
-        });
+      try {
+        const res = await UserSignIn({ email, password });
+        dispatch(loginSuccess(res.data)); // Dispatch login success with user data
+        alert("Login Success");
+      } catch (err) {
+        alert(err.response?.data?.message || "Something went wrong!");
+      } finally {
+        setLoading(false);
+        setButtonDisabled(false);
+      }
     }
   };
 
@@ -64,13 +64,7 @@ const SignIn = () => {
         <Title>Welcome to Fittrack 👋</Title>
         <Span>Please login with your details here</Span>
       </div>
-      <div
-        style={{
-          display: "flex",
-          gap: "20px",
-          flexDirection: "column",
-        }}
-      >
+      <div style={{ display: "flex", gap: "20px", flexDirection: "column" }}>
         <TextInput
           label="Email Address"
           placeholder="Enter your email address"

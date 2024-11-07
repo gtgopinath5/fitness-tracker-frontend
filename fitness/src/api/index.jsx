@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create an axios instance with the base URL for the backend API
 const API = axios.create({
-    baseURL: "https://fitness-tracker-backend-fpdk.onrender.com/api/",  // Base URL
+  baseURL: "https://fitness-tracker-backend-fpdk.onrender.com/api/",  // Base URL for API
 });
 
 // Helper function to check the response before accessing 'data'
@@ -17,22 +17,22 @@ const handleResponse = (response) => {
 // User sign-up API call
 export const UserSignUp = async (data) => {
   try {
-    const response = await API.post("user/signup", data); // No need for the full URL here
-    return handleResponse(response); // Check and return response data
+    const response = await API.post("user/signup", data); // Relative path to API endpoint
+    return handleResponse(response); // Return valid response data
   } catch (error) {
     console.error("Error during sign-up:", error.message);
-    throw error; // Throw the error for further handling
+    throw error; // Throw error for handling
   }
 };
 
 // User sign-in API call
 export const UserSignIn = async (data) => {
   try {
-    const response = await API.post("user/signin", data); // Again, relative URL
-    return handleResponse(response);
+    const response = await API.post("user/signin", data); // Relative path to API endpoint
+    return handleResponse(response); // Return valid response data
   } catch (error) {
     console.error("Error during sign-in:", error.message);
-    throw error;
+    throw error; // Throw error for handling
   }
 };
 
